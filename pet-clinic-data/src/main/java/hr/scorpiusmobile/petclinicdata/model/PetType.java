@@ -9,7 +9,7 @@ package hr.scorpiusmobile.petclinicdata.model;
  *
  * 
  */
-class PetType {
+class PetType extends BaseEntity{
     
     private String name;
 
