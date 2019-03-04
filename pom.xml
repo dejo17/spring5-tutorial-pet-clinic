@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>hr.scorpiusmobile</groupId>
 	<artifactId>spring-tutorial-pet-clinic</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>spring-tutorial-pet-clinic</name>
 	<description>Recreation of a demo project Pet Clinic. Written while following a Spring Framework tutorial
 	</description>
@@ -42,7 +42,7 @@
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/dejo17/spring5-tutorial-pet-clinic.git</developerConnection>
-	  <tag>spring-tutorial-pet-clinic-0.0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 </project>
