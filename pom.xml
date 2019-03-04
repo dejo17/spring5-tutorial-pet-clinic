@@ -35,14 +35,15 @@
 				<version>2.5.3</version>
 				<configuration>
 					<goals>install</goals>
+					<autoVersionSubModules>true</autoVersionSubModules>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/dejo17/spring5-tutorial-pet-clinic.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+	<developerConnection>scm:git:https://github.com/dejo17/spring5-tutorial-pet-clinic.git</developerConnection>
+	<tag>HEAD</tag>
+</scm>
 
 </project>
