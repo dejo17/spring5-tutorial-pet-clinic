@@ -1,13 +1,9 @@
 package hr.scorpiusmobile.petclinicdata.services;
 
-import hr.scorpiusmobile.petclinicdata.model.Owner;
 import hr.scorpiusmobile.petclinicdata.model.Pet;
 
 import java.util.Set;
 
-public interface PetService {
+public interface PetService extends CrudService<Pet,Long>{
 
-    Pet findByID(Long id);
-    Pet save(Pet pet);
-    Set<Pet> findAll();
 }
