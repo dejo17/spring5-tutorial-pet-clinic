@@ -1,11 +1,11 @@
 package hr.scorpiusmobile.petclinicdata.services.map;
 
 import hr.scorpiusmobile.petclinicdata.model.Vet;
-import hr.scorpiusmobile.petclinicdata.services.CrudService;
+import hr.scorpiusmobile.petclinicdata.services.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
