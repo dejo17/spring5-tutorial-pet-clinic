@@ -1,10 +1,12 @@
-package hr.scorpiusmobile.petclinicdata.services.map;
+package hr.scorpiusmobile.petclinic.services.map;
 
-import hr.scorpiusmobile.petclinicdata.model.Pet;
-import hr.scorpiusmobile.petclinicdata.services.PetService;
+import hr.scorpiusmobile.petclinic.model.Pet;
+import hr.scorpiusmobile.petclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {

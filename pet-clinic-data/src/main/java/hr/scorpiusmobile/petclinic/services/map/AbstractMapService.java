@@ -1,4 +1,4 @@
-package hr.scorpiusmobile.petclinicdata.services.map;
+package hr.scorpiusmobile.petclinic.services.map;
 
 import java.util.HashMap;
 import java.util.HashSet;

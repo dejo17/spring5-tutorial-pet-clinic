@@ -1,10 +1,12 @@
-package hr.scorpiusmobile.petclinicdata.services.map;
+package hr.scorpiusmobile.petclinic.services.map;
 
-import hr.scorpiusmobile.petclinicdata.model.Owner;
-import hr.scorpiusmobile.petclinicdata.services.OwnerService;
+import hr.scorpiusmobile.petclinic.model.Owner;
+import hr.scorpiusmobile.petclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {

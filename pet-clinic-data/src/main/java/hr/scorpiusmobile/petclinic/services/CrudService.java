@@ -1,5 +1,5 @@
 
-package hr.scorpiusmobile.petclinicdata.services;
+package hr.scorpiusmobile.petclinic.services;
 
 
 import java.util.Set;

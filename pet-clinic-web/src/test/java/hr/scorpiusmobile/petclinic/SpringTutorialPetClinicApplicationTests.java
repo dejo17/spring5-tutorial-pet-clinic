@@ -1,4 +1,4 @@
-package hr.scorpiusmobile.petclinicweb;
+package hr.scorpiusmobile.petclinic;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

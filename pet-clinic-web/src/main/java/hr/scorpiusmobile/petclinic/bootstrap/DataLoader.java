@@ -1,11 +1,10 @@
-package hr.scorpiusmobile.petclinicweb.bootstrap;
+package hr.scorpiusmobile.petclinic.bootstrap;
 
-import hr.scorpiusmobile.petclinicdata.model.Owner;
-import hr.scorpiusmobile.petclinicdata.model.Vet;
-import hr.scorpiusmobile.petclinicdata.services.OwnerService;
-import hr.scorpiusmobile.petclinicdata.services.VetService;
-import hr.scorpiusmobile.petclinicdata.services.map.OwnerServiceMap;
-import hr.scorpiusmobile.petclinicdata.services.map.VetServiceMap;
+import hr.scorpiusmobile.petclinic.model.Owner;
+import hr.scorpiusmobile.petclinic.model.Vet;
+import hr.scorpiusmobile.petclinic.services.OwnerService;
+import hr.scorpiusmobile.petclinic.services.VetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +14,10 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+    @Autowired
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override

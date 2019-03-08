@@ -1,6 +1,6 @@
-package hr.scorpiusmobile.petclinicdata.services;
+package hr.scorpiusmobile.petclinic.services;
 
-import hr.scorpiusmobile.petclinicdata.model.Owner;
+import hr.scorpiusmobile.petclinic.model.Owner;
 
 public interface OwnerService extends CrudService<Owner, Long>{
 

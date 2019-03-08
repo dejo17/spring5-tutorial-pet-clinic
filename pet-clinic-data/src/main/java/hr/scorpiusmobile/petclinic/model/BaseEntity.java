@@ -1,4 +1,4 @@
-package hr.scorpiusmobile.petclinicdata.model;
+package hr.scorpiusmobile.petclinic.model;
 
 import java.io.Serializable;
 
