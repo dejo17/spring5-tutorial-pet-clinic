@@ -1,13 +1,25 @@
 package hr.scorpiusmobile.petclinic.services.map;
 
 import hr.scorpiusmobile.petclinic.model.Owner;
+import hr.scorpiusmobile.petclinic.model.Pet;
 import hr.scorpiusmobile.petclinic.services.OwnerService;
+import hr.scorpiusmobile.petclinic.services.PetService;
+import hr.scorpiusmobile.petclinic.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final PetService petService;
+    private final PetTypeService petTypeService;
+
+    public OwnerServiceMap(PetService petType, PetTypeService petTypeService) {
+        this.petService = petType;
+        this.petTypeService = petTypeService;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -20,7 +32,30 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+
+        if(object!=null) {
+
+            if(object.getPets()!=null){
+                object.getPets().forEach(pet -> {
+                    if(pet.getPetType()!=null){
+                        if (pet.getPetType().getId()==null){
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    }else{
+                        throw new RuntimeException("Pet type required!");
+                    }
+                    if (pet.getId()==null){
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+            return super.save(object);
+        }else{
+
+            return null;
+        }
+
     }
 
     @Override
