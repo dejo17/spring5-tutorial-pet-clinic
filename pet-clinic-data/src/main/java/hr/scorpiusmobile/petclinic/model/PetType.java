@@ -7,10 +7,9 @@ package hr.scorpiusmobile.petclinic.model;
 
 /**
  *
- * 
  */
-class PetType extends BaseEntity{
-    
+public class PetType extends BaseEntity {
+
     private String name;
 
     public String getName() {
@@ -20,7 +19,6 @@ class PetType extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
+
 }
