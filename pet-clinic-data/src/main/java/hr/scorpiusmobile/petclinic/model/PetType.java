@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "types")
+@Table(name = "type")
 public class PetType extends BaseEntity {
 
     @Column(name = "name")
