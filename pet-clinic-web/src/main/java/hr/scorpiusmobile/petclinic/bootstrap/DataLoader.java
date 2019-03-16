@@ -1,10 +1,7 @@
 package hr.scorpiusmobile.petclinic.bootstrap;
 
 import hr.scorpiusmobile.petclinic.model.*;
-import hr.scorpiusmobile.petclinic.services.OwnerService;
-import hr.scorpiusmobile.petclinic.services.PetTypeService;
-import hr.scorpiusmobile.petclinic.services.SpecialtyService;
-import hr.scorpiusmobile.petclinic.services.VetService;
+import hr.scorpiusmobile.petclinic.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,13 +15,19 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
+    private final PetService petService;
 
     @Autowired
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService,
+                      PetTypeService petTypeService, SpecialtyService specialtyService,
+                      VisitService visitService, PetService petService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
+        this.petService = petService;
     }
 
     @Override
@@ -84,6 +87,7 @@ public class DataLoader implements CommandLineRunner {
         exit.setName("Exit");
         exit.setBirthDate(LocalDate.now());
         owner1.getPets().add(exit);
+        petService.save(exit);
 
         Pet mrtvaMacka = new Pet();
         mrtvaMacka.setPetType(savedCatPetType);
@@ -91,6 +95,13 @@ public class DataLoader implements CommandLineRunner {
         mrtvaMacka.setName("Whiskas");
         mrtvaMacka.setBirthDate(LocalDate.now());
         owner2.getPets().add(mrtvaMacka);
+        petService.save(mrtvaMacka);
+
+        Visit mrtvaMackaVisit = new Visit();
+        mrtvaMackaVisit.setPet(mrtvaMacka);
+        mrtvaMackaVisit.setDate(LocalDate.now());
+        mrtvaMackaVisit.setDescription("Kise, kaslje, auto ju gazi");
+        visitService.save(mrtvaMackaVisit);
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Damir");
