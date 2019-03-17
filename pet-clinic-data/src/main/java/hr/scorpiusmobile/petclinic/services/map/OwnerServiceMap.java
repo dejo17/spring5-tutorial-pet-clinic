@@ -5,11 +5,13 @@ import hr.scorpiusmobile.petclinic.model.Pet;
 import hr.scorpiusmobile.petclinic.services.OwnerService;
 import hr.scorpiusmobile.petclinic.services.PetService;
 import hr.scorpiusmobile.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetService petService;
