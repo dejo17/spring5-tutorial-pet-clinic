@@ -35,25 +35,25 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public Owner save(Owner object) {
 
-        if(object!=null) {
+        if (object != null) {
 
-            if(object.getPets()!=null){
+            if (object.getPets() != null) {
                 object.getPets().forEach(pet -> {
-                    if(pet.getPetType()!=null){
-                        if (pet.getPetType().getId()==null){
+                    if (pet.getPetType() != null) {
+                        if (pet.getPetType().getId() == null) {
                             pet.setPetType(petTypeService.save(pet.getPetType()));
                         }
-                    }else{
+                    } else {
                         throw new RuntimeException("Pet type required!");
                     }
-                    if (pet.getId()==null){
+                    if (pet.getId() == null) {
                         Pet savedPet = petService.save(pet);
                         pet.setId(savedPet.getId());
                     }
                 });
             }
             return super.save(object);
-        }else{
+        } else {
 
             return null;
         }
@@ -72,6 +72,22 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+
+        //old way:
+        /*Set<Owner> owners = findAll();
+        if (owners.size() > 0) {
+            for (Owner owner : owners) {
+                if (owner.getLastName() == lastName) {
+                    return owner;
+                }
+            }
+        }
+        return null;*/
+        //java 8 way, using stream:
+        return findAll()
+                .stream()
+                .filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
+                .findFirst()
+                .orElse(null);
     }
 }
