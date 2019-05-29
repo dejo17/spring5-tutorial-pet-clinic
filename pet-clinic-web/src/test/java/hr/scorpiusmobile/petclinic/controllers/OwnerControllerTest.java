@@ -81,7 +81,7 @@ class OwnerControllerTest {
 
         mockMvc.perform(get("/owners/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/ownerDetails"))
+                .andExpect(view().name("owners/ownersDetails"))
                 .andExpect(model().attributeExists("owner"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1L))))
                 .andExpect(model().attribute("owner", hasProperty("firstName", is("Dino"))));
