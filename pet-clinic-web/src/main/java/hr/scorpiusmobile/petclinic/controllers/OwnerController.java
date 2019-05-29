@@ -1,6 +1,7 @@
 package hr.scorpiusmobile.petclinic.controllers;
 
 import hr.scorpiusmobile.petclinic.services.OwnerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@Slf4j
 @RequestMapping("/owners")
 public class OwnerController {
 
@@ -27,12 +29,14 @@ public class OwnerController {
 
     @RequestMapping("/find")
     public String findOwners() {
+
         return "notimplemented";
     }
 
     @GetMapping("/{ownerId}")
-    public ModelAndView showOwner (@PathVariable("ownerId") Long ownerId){
-        ModelAndView mav = new ModelAndView("owners/ownerDetails");
+    public ModelAndView showOwner (@PathVariable("ownerId") String ownerId){
+        log.debug("Lagani debug message za probu");
+        ModelAndView mav = new ModelAndView("owners/ownersDetails");
         mav.addObject("owner", ownerService.findById(Long.valueOf(ownerId)));
         return mav;
     }
