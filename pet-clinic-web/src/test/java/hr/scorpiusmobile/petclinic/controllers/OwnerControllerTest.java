@@ -15,8 +15,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,7 +46,7 @@ class OwnerControllerTest {
     }
 
     @Test
-    void listOfOwners() throws Exception {
+    void testListOfOwners() throws Exception {
         when(ownerService.findAll()).thenReturn(owners);
         mockMvc.perform(get("/owners"))
                 .andExpect(status().isOk())
@@ -55,7 +56,7 @@ class OwnerControllerTest {
     }
 
     @Test
-    void listOfOwnersByIndex() throws Exception {
+    void testListOfOwnersByIndex() throws Exception {
         when(ownerService.findAll()).thenReturn(owners);
         mockMvc.perform(get("/owners/index"))
                 .andExpect(status().isOk())
@@ -65,10 +66,26 @@ class OwnerControllerTest {
     }
 
     @Test
-    void findOwners() throws Exception {
+    void testFindOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("notimplemented"));
         verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    void testDisplayOwner() throws Exception {
+
+        Owner owner = Owner.builder().id(1L).firstName("Dino").lastName("Micko").build();
+        when(ownerService.findById(anyLong())).thenReturn(owner);
+
+        mockMvc.perform(get("/owners/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownerDetails"))
+                .andExpect(model().attributeExists("owner"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(1L))))
+                .andExpect(model().attribute("owner", hasProperty("firstName", is("Dino"))));
+
+
     }
 }

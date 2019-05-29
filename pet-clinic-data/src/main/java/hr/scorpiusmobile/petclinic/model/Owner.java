@@ -25,7 +25,7 @@ public class Owner extends Person {
 
     @Builder
     public Owner(Long id, String firstName, String lastName, Set<Pet> pets, String address, String telephone, String city) {
-        super(firstName, lastName);
+        super(id, firstName, lastName);
         this.pets = pets;
         this.address = address;
         this.telephone = telephone;
