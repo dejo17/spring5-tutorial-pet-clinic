@@ -6,6 +6,7 @@
 package hr.scorpiusmobile.petclinic.model;
 
 import lombok.*;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,8 +21,18 @@ import java.util.Set;
 @AllArgsConstructor
 //@Builder
 @Entity
-@Table(name="owners")
+@Table(name = "owners")
 public class Owner extends Person {
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Set<Pet> pets = new HashSet<>();
+    @Column(name = "address")
+    private String address;
+    @Column(name = "telephone")
+    private String telephone;
+    @Column(name = "city")
+    private String city;
 
     @Builder
     public Owner(Long id, String firstName, String lastName, Set<Pet> pets, String address, String telephone, String city) {
@@ -32,12 +43,35 @@ public class Owner extends Person {
         this.city = city;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Set<Pet> pets = new HashSet<>();
-    @Column(name="address")
-    private String address;
-    @Column(name="telephone")
-    private String telephone;
-    @Column(name="city")
-    private String city;
+
+    /**
+     * Return the Pet with given name, or null if none is found for this Owner
+     *
+     * @param name to test
+     * @return Pet if pet name is already in use
+     */
+    public Pet getPet(String name) {
+        return getPet(name, false);
+    }
+
+    /**
+     * @param name      to test
+     * @param ignoreNew
+     * @return Pet if pet name is already in use, null if there is no pet with given name
+     */
+    public Pet getPet(String name, boolean ignoreNew) {
+        name = name.toLowerCase();
+        for (Pet pet : pets) {
+            if (!ignoreNew || !pet.isNew()) {
+                String compName = pet.getName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return pet;
+                }
+            }
+        }
+        return null;
+    }
+
+
 }
