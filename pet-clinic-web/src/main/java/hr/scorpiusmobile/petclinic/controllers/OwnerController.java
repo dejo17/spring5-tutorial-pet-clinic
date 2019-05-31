@@ -103,7 +103,7 @@ public class OwnerController {
         }else{
             owner.setId(Long.valueOf(ownerId));
             Owner savedOwner = ownerService.save(owner);
-            return "redirect: /owners/" + savedOwner.getId();
+            return "redirect:/owners/" + savedOwner.getId();
         }
     }
 

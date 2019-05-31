@@ -20,31 +20,33 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="pets")
+@Table(name = "pets")
 public class Pet extends BaseEntity {
 
-@Builder
+    @Builder
     public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDate, Set<Visit> visits) {
         super(id);
         this.name = name;
         this.petType = petType;
         this.owner = owner;
         this.birthDate = birthDate;
-        this.visits = visits;
+        if (visits == null || visits.size() > 0) {
+            this.visits = visits;
+        }
     }
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="type_id")
+    @JoinColumn(name = "type_id")
     private PetType petType;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @Column(name="birth_date")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
