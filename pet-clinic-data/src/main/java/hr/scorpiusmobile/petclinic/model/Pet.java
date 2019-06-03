@@ -6,6 +6,7 @@
 package hr.scorpiusmobile.petclinic.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class Pet extends BaseEntity {
     private Owner owner;
 
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")  //same effect as modifying dataBinder as in vetController,  but this effects entity directly
     private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
